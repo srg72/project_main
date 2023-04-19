@@ -7,13 +7,11 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 
 import { fetchTrailer } from './trailer';
 import { checkImg } from './movies';
-import { displayLoading, hideLoading } from './loading';
 
 const refs = {
   openModal: document.querySelector('.movies__list'),
   closeModalBtn: document.querySelector('.button-close'),
   backdrop: document.querySelector('.backdrop-movie'),
-  movieModal: document.querySelector('.modal-movie'),
   movieCard: document.querySelector('.movie-card'),
   body: document.querySelector('[data-page]'),
 };
@@ -33,10 +31,8 @@ refs.openModal.addEventListener('click', searchIdforMovie);
 async function searchIdforMovie(e) {
   if (e.target.nodeName === 'LI') {
     const idMovie = e.target.id;
-    refs.movieModal.appendChild(displayLoading());
     const response = await fetchById(idMovie);
-    hideLoading();
-    
+
     createMarkupMovieCardInModal(response);
   }
   if (
@@ -46,12 +42,10 @@ async function searchIdforMovie(e) {
     e.target.nodeName === 'P'
   ) {
     const idMovie = e.target.parentElement.id;
-    instance.show();
-    refs.movieModal.appendChild(displayLoading());
     const response = await fetchById(idMovie);
-    hideLoading();
     // берем ID клік idMovie
     createMarkupMovieCardInModal(response);
+    instance.show();
     refs.closeModalBtn.addEventListener('click', closeModal);
     document.addEventListener('keydown', event => closeModalEscape(event));
 
@@ -293,22 +287,66 @@ function onAddToWatched(e) {
   Notiflix.Report.success('', 'Film added to WATCHED');
   localStorage.setItem('WatchedFilms', JSON.stringify(parsedWathcedFilms));
 }
-
-// Angela Додати це замість onAddToQueue() яка в цьому файлі
 function onAddToQueue() {
   const filmIdToLS = document.querySelector(`[data-add="queue"]`).dataset.id;
-  const parsedQueueFilms = JSON.parse(localStorage.getItem('QueueFilms'));
 
+  const parsedQueueFilms = JSON.parse(localStorage.getItem('QueueFilms'));
+  if (parsedQueueFilms === null) {
+    localStorage.setItem('QueueFilms', JSON.stringify([filmIdToLS]));
+  }
   if (parsedQueueFilms.includes(filmIdToLS)) {
     return Notiflix.Report.failure(
       '',
       'The movie has already been added to the queue!'
     );
-  } else {
-    localStorage.setItem(
-      'QueueFilms',
-      JSON.stringify([filmIdToLS, ...parsedQueueFilms])
-    );
-    Notiflix.Report.success('', 'Film added to QUEUE');
   }
+
+  parsedQueueFilms.push(filmIdToLS);
+  Notiflix.Report.success('', 'Film added to QUEUE');
+  localStorage.setItem('QueueFilms', JSON.stringify(parsedQueueFilms));
+}
+
+function onRemoveFromWatched(e) {
+  const filmIdToLS = document.querySelector(`[data-remove="wathced"]`).dataset
+    .id;
+
+  const parsedWathcedFilms = JSON.parse(localStorage.getItem('WatchedFilms'));
+  if (!parsedWathcedFilms) {
+    Notiflix.Report.failure('', 'The list of watched is empty');
+    return;
+  }
+  if (!parsedWathcedFilms.includes(filmIdToLS)) {
+    Notiflix.Report.failure('', 'There is no such movie in your watched list');
+    return;
+  }
+  if (parsedWathcedFilms.includes(filmIdToLS)) {
+    Notiflix.Report.success('', 'Movie is removed from watched');
+    localStorage.removeItem('WatchedFilms', JSON.stringify([filmIdToLS]));
+  }
+
+  parsedWathcedFilms.splice(parsedWathcedFilms.indexOf(filmIdToLS), 1);
+  Notiflix.Report.success('', 'Movie Del From WATCHED');
+  localStorage.setItem('WatchedFilms', JSON.stringify(parsedWathcedFilms));
+}
+
+function onRemoveFromQueue() {
+  const filmIdToLS = document.querySelector(`[data-remove="queue"]`).dataset.id;
+  const parsedQueueFilms = JSON.parse(localStorage.getItem('QueueFilms'));
+
+  if (!parsedQueueFilms) {
+    Notiflix.Report.failure('', 'The list of watched is empty');
+    return;
+  }
+
+  if (!parsedQueueFilms.includes(filmIdToLS)) {
+    Notiflix.Report.failure('', 'There is no such movie in your queue list');
+    return;
+  }
+  if (parsedQueueFilms.includes(filmIdToLS)) {
+    Notiflix.Report.success('', 'Movie is removed from queue');
+    localStorage.removeItem('QueueFilms', JSON.stringify([filmIdToLS]));
+  }
+  parsedQueueFilms.splice(parsedQueueFilms.indexOf(filmIdToLS), 1);
+  Notiflix.Report.success('', 'Movie DEL QUEUE');
+  localStorage.setItem('QueueFilms', JSON.stringify(parsedQueueFilms));
 }
