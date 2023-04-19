@@ -18,8 +18,11 @@
     "url": "https://github.com/goitacademy/parcel-project-template/issues"
   },
   "dependencies": {
+    "@firebase/app": "^0.9.8",
+    "@firebase/database": "^0.14.4",
     "axios": "^1.3.5",
     "basiclightbox": "^5.0.4",
+    "firebase": "^9.20.0",
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.6",
     "simplelightbox": "^2.13.0",
@@ -30,7 +33,8 @@
     "buffer": "^6.0.3",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
-    "posthtml-include": "^1.7.4"
+    "posthtml-include": "^1.7.4",
+    "process": "^0.11.10"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"
 }

@@ -23,27 +23,52 @@
         </button>
       </form>
       <div class="home">
-        <a href="/" class="header__nav-link active">Home</a>
+        <a href="#" class="header__nav-link active">Home</a>
       </div>
       <div>
         <button class="library" data-action="library">My Library</button>
       </div>
-    </div>
-    <div class="library-buttons">
+      <!-- ==================================================== -->
+
+      <div class="header__nav-item">
+        <button type="button" class="sign-in__button">
+          <span class="header__nav-signIn">Sign in</span>
+          <svg
+            id="icon-signin"
+            class="sign-in__icon"
+            width="24px"
+            height="24px"
+          >
+            <use href="./images/header_logo.png"></use>
+          </svg>
+          <svg
+            id="icon-logout"
+            class="sign-in__icon sign-in__icon--logout"
+            width="24px"
+            height="24px"
+          >
+            <use href="./images/svg/heart.svg"></use>
+          </svg>
+        </button>
+      </div>
       <!--TO DO: змінити стиль кнопок і т.д, залишити атрибути data-action!!! -->
       <div>
-        <button type="button" data-action="watched" class="header-movies-buttons watched">
+        <button
+          type="button"
+          data-action="watched"
+          class="header-movies-buttons"
+        >
           Watched
         </button>
       </div>
       <div>
-        <button type="button" data-action="queue" class="header-movies-buttons queue">
+        <button type="button" data-action="queue" class="header-movies-buttons">
           Queue
         </button>
       </div>
     </div>
-    <div class="logo logo-main" id="logo">
-      <a href="/">
+    <div class="logo">
+      <a href="#">
         <img src="./images/header_logo.png" alt="#" />
       </a>
       <h1>Filmoteka</h1>
