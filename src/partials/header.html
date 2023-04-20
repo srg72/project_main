@@ -1,4 +1,4 @@
-<header>
+<!-- <header>
   <div class="layout">
     <img
       class="hr_img"
@@ -28,9 +28,9 @@
       <div>
         <button class="library" data-action="library">My Library</button>
       </div>
-      <!-- ==================================================== -->
+      ==================================================== -->
 
-      <div class="header__nav-item">
+<!-- <div class="header__nav-item">
         <button type="button" class="sign-in__button">
           <span class="header__nav-signIn">Sign in</span>
           <svg
@@ -50,9 +50,9 @@
             <use href="./images/svg/heart.svg"></use>
           </svg>
         </button>
-      </div>
-      <!--TO DO: змінити стиль кнопок і т.д, залишити атрибути data-action!!! -->
-      <div>
+      </div> -->
+<!--TO DO: змінити стиль кнопок і т.д, залишити атрибути data-action!!! -->
+<!-- <div>
         <button
           type="button"
           data-action="watched"
@@ -69,6 +69,68 @@
     </div>
     <div class="logo">
       <a href="#">
+        <img src="./images/header_logo.png" alt="#" />
+      </a>
+      <h1>Filmoteka</h1>
+    </div>
+  </div>
+</header> -->
+<!-- =================================================================== -->
+
+<header>
+  <div class="layout">
+    <img
+      class="hr_img"
+      src="./images/header_background_image_red.png"
+      alt="header_bg_img"
+    />
+    <img
+      class="hr_img_mob"
+      src="./images/header_mob_background_image_red.png"
+      alt="header_bg_img"
+    />
+    <div class="nav">
+      <form class="search-form" id="search-form">
+        <input
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Movie search"
+        />
+        <button type="submit">
+          <img src="./images/search_ico.png" alt="#" />
+        </button>
+      </form>
+      <div class="home">
+        <a href="./index.html" class="header__nav-link active">Home</a>
+      </div>
+      <div>
+        <button class="library" data-action="library">My Library</button>
+      </div>
+    </div>
+    <div class="library-buttons">
+      <!--TO DO: змінити стиль кнопок і т.д, залишити атрибути data-action!!! -->
+      <div>
+        <button
+          type="button"
+          data-action="watched"
+          class="header-movies-buttons watched"
+        >
+          Watched
+        </button>
+      </div>
+      <div>
+        <button
+          type="button"
+          data-action="queue"
+          class="header-movies-buttons queue"
+        >
+          Queue
+        </button>
+      </div>
+    </div>
+    <div class="logo logo-main" id="logo">
+      <a href="./index.html">
         <img src="./images/header_logo.png" alt="#" />
       </a>
       <h1>Filmoteka</h1>
